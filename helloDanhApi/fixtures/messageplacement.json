@@ -1,0 +1,30 @@
+[
+    {
+        "model": "helloDahnApi.messageplacement",
+        "pk": 1,
+        "fields": {
+            "color": "red"
+        }
+    },
+    {
+        "model": "helloDahnApi.messageplacement",
+        "pk": 2,
+        "fields": {
+            "color": "yellow"
+        }
+    },
+    {
+        "model": "helloDahnApi.messageplacement",
+        "pk": 3,
+        "fields": {
+            "color": "green"
+        }
+    },
+    {
+        "model": "helloDahnApi.messageplacement",
+        "pk": 4,
+        "fields": {
+            "color": "blue"
+        }
+    }
+]

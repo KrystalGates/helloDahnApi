@@ -1,0 +1,26 @@
+[
+    {
+        "model": "helloDahnApi.contact",
+        "pk": 1,
+        "fields": {
+            "first_name": "Sam",
+            "last_name": "Borske",
+            "phone_number": "9018882829",
+            "email": "sam@gmail.com",
+            "address": "123 West St. Nashville, TN",
+            "user_id": 1
+        }
+    },
+    {
+        "model": "helloDahnApi.contact",
+        "pk": 2,
+        "fields": {
+            "first_name": "Danny",
+            "last_name": "Borske",
+            "phone_number": "9018742332",
+            "email": "danny@gmail.com",
+            "address": "123 West St. Nashville, TN",
+            "user_id": 1
+        }
+    }
+]
