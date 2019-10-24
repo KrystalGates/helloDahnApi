@@ -1,4 +1,4 @@
 from .contact import Contact
-from .user import User
-from .message import Message
-from .messageplacement import MessagePlacement
+from .customuser import CustomUser
+from .alert import Alert
+from .alertplacement import AlertPlacement
