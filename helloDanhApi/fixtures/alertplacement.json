@@ -1,27 +1,27 @@
 [
     {
-        "model": "helloDahnApi.messageplacement",
+        "model": "helloDahnApi.alertplacement",
         "pk": 1,
         "fields": {
             "color": "red"
         }
     },
     {
-        "model": "helloDahnApi.messageplacement",
+        "model": "helloDahnApi.alertplacement",
         "pk": 2,
         "fields": {
             "color": "yellow"
         }
     },
     {
-        "model": "helloDahnApi.messageplacement",
+        "model": "helloDahnApi.alertplacement",
         "pk": 3,
         "fields": {
             "color": "green"
         }
     },
     {
-        "model": "helloDahnApi.messageplacement",
+        "model": "helloDahnApi.alertplacement",
         "pk": 4,
         "fields": {
             "color": "blue"
