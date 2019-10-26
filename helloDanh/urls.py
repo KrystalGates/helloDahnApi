@@ -17,8 +17,14 @@ from django.conf.urls import url, include
 from rest_framework import routers
 from rest_framework.authtoken.views import obtain_auth_token
 from helloDanhApi.views import register_user, login_user
+from helloDanhApi.views import Alerts
+from helloDanhApi.views import CustomUsers
+from helloDanhApi.views import UserViewSet
 
 router = routers.DefaultRouter(trailing_slash=False)
+router.register(r'customuser', CustomUsers, 'customuser')
+router.register(r'users', UserViewSet, 'user')
+router.register(r'alert', Alerts, 'alert')
 
 urlpatterns = [
     url(r'^', include(router.urls)),

@@ -4,7 +4,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 from django.views.decorators.csrf import csrf_exempt
-from helloDanhApi.models import CustomUser
+from helloDanhApi.models import CustomUser, Alert, AlertPlacement
 
 @csrf_exempt
 def login_user(request):
@@ -69,6 +69,34 @@ def register_user(request):
 
     # Use the REST Framework's token generator on the new user account
     token = Token.objects.create(user=new_user)
+
+    # Create default alerts to user upon registration
+    default_alert_red = Alert.objects.create(
+        alert='Hello red alert',
+        alert_placement=AlertPlacement.objects.get(pk=1),
+        user=custom_user,
+        alert_enabled=True
+
+    )
+    default_alert_yellow = Alert.objects.create(
+        alert='Hello yellow alert',
+        alert_placement=AlertPlacement.objects.get(pk=2),
+        user=custom_user,
+        alert_enabled=True
+    )
+    default_alert_green = Alert.objects.create(
+        alert='Hello green alert',
+        alert_placement=AlertPlacement.objects.get(pk=3),
+        user=custom_user,
+        alert_enabled=True
+    )
+
+    # Add default alerts
+    default_alert_red.save()
+    default_alert_yellow.save()
+    default_alert_green.save()
+
+
 
     # Return the token to the client
     data = json.dumps({"token": token.key})
