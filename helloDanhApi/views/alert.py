@@ -73,13 +73,17 @@ class Alerts(ViewSet):
 
 
     def list(self, request):
-        """Handle GET requests to alerts resource
+        """Handle GET requests to alert resource
 
         Returns:
             Response -- JSON serialized list of alerts
         """
-        alerts = Alert.objects.all()
+        try:
+            user = CustomUser.objects.get(user=request.auth.user)
+            alerts_of_user = Alert.objects.filter(user=user)
 
-        serializer = AlertSerializer(
-            alerts, many=True, context={'request': request})
+        except Alert.DoesNotExist as ex:
+            return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = AlertSerializer(alerts_of_user, many=True, context={'request': request})
         return Response(serializer.data)

@@ -20,11 +20,13 @@ from helloDanhApi.views import register_user, login_user
 from helloDanhApi.views import Alerts
 from helloDanhApi.views import CustomUsers
 from helloDanhApi.views import UserViewSet
+from helloDanhApi.views import Contacts
 
 router = routers.DefaultRouter(trailing_slash=False)
-router.register(r'customuser', CustomUsers, 'customuser')
+router.register(r'customusers', CustomUsers, 'customuser')
 router.register(r'users', UserViewSet, 'user')
-router.register(r'alert', Alerts, 'alert')
+router.register(r'contacts', Contacts, 'contact')
+router.register(r'alerts', Alerts, 'alert')
 
 urlpatterns = [
     url(r'^', include(router.urls)),
