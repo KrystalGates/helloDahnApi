@@ -1,5 +1,6 @@
 """View module for handling requests about user"""
 from django.http import HttpResponseServerError
+from rest_framework.decorators import action
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers
@@ -19,7 +20,7 @@ class CustomUserSerializer(serializers.HyperlinkedModelSerializer):
             view_name='custom_user',
             lookup_field='id'
         )
-        fields = ('id', 'url', 'address', 'phone_number', 'alert_placement', 'user', 'user_id')
+        fields = ('id', 'url', 'address', 'phone_number', 'user', 'user_id')
         depth = 1
 
 
@@ -27,7 +28,7 @@ class CustomUsers(ViewSet):
     """Custom user for helloDanh"""
 
     def retrieve(self, request, pk=None):
-        """Handle GET requests for single user
+        """Handle GET requests for a user
 
         Returns:
             Response -- JSON serialized user instance
@@ -69,4 +70,13 @@ class CustomUsers(ViewSet):
         except Exception as ex:
             return Response({'message': ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+    @action(methods=['get'], detail=False)
+    def currentuser(self, request):
 
+        try:
+            custom_user = CustomUser.objects.get(user=request.auth.user)
+        except CustomUser.DoesNotExist as ex:
+            return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = CustomUserSerializer(custom_user, context={'request': request})
+        return Response(serializer.data)
