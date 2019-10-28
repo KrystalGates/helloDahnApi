@@ -65,7 +65,17 @@ class Contacts(ViewSet):
             Response -- Empty body with 204 status code
         """
         contact = Contact.objects.get(pk=pk)
-        contact.contact = request.data["contact"]
+        if request.data["first_name"]:
+            contact.first_name = request.data["first_name"]
+        if request.data["last_name"]:
+            contact.last_name = request.data["last_name"]
+        if request.data["email"]:
+            contact.email = request.data["email"]
+        if request.data["address"]:
+            contact.address = request.data["address"]
+        if request.data["phone_number"]:
+            contact.phone_number = request.data["phone_number"]
+            
         contact.save()
 
         return Response({}, status=status.HTTP_204_NO_CONTENT)
