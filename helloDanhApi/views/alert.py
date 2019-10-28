@@ -65,9 +65,9 @@ class Alerts(ViewSet):
         Returns:
             Response -- Empty body with 204 status code
         """
-        alert = Alert.objects.get(pk=pk)
-        alert.alert = request.data["alert"]
-        alert.save()
+        edit_alert = Alert.objects.get(pk=pk)
+        edit_alert.alert = request.data["alert"]
+        edit_alert.save()
 
         return Response({}, status=status.HTTP_204_NO_CONTENT)
 
