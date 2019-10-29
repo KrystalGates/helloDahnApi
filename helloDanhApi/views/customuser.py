@@ -5,6 +5,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers
 from rest_framework import status
+from django.contrib.auth.models import User
 from helloDanhApi.models import CustomUser
 
 
@@ -46,29 +47,39 @@ class CustomUsers(ViewSet):
         Returns:
             Response -- Empty body with 204 status code
         """
-        user = CustomUser.objects.get(pk=pk)
-        user.alert = request.data["alert"]
+        custom_user = CustomUser.objects.get(pk=pk)
+        custom_user.address = request.data["address"]
+        custom_user.phone_number = request.data["phone_number"]
+
+        user = User.objects.get(pk=pk)
+        user.first_name = request.data["first_name"]
+        user.last_name = request.data["last_name"]
+        user.email = request.data["email"]
+        user.username = request.data["email"]
+
         user.save()
+        custom_user.user = user
+        custom_user.save()
 
         return Response({}, status=status.HTTP_204_NO_CONTENT)
 
-    def destroy(self, request, pk=None):
-        """Handle DELETE requests for an user
+    # def destroy(self, request, pk=None):
+    #     """Handle DELETE requests for an user
 
-        Returns:
-            Response -- 200, 404, or 500 status code
-        """
-        try:
-            user = CustomUser.objects.get(pk=pk)
-            user.delete()
+    #     Returns:
+    #         Response -- 200, 404, or 500 status code
+    #     """
+    #     try:
+    #         user = CustomUser.objects.get(pk=pk)
+    #         user.delete()
 
-            return Response({}, status=status.HTTP_204_NO_CONTENT)
+    #         return Response({}, status=status.HTTP_204_NO_CONTENT)
 
-        except CustomUser.DoesNotExist as ex:
-            return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
+    #     except CustomUser.DoesNotExist as ex:
+    #         return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
 
-        except Exception as ex:
-            return Response({'message': ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    #     except Exception as ex:
+    #         return Response({'message': ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     @action(methods=['get'], detail=False)
     def currentuser(self, request):
