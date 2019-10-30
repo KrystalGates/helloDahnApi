@@ -19,4 +19,4 @@ class Contact(models.Model):
     phone_number = models.IntegerField()
     email = models.EmailField(max_length=254)
     address = models.CharField(max_length=100)
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='contacts')
