@@ -26,26 +26,6 @@ class AlertSerializer(serializers.HyperlinkedModelSerializer):
 class Alerts(ViewSet):
     """Alerts for helloDanh"""
 
-    # def create(self, request):
-    #     """Handle POST operations
-
-    #     Returns:
-    #         Response -- JSON serialized Alert instance
-    #     """
-    #     new_alert = Alert()
-    #     new_alert.alert = request.data["alert"]
-    #     alert_placement = AlertPlacement.objects.get(pk=request.data["alert_placement"])
-    #     custom_user = CustomUser.objects.get(user=request.auth.user)
-    #     alert_enabled = True
-    #     new_alert.alert_placement = alert_placement
-    #     new_alert.user = custom_user
-    #     new_alert.alert_enabled = alert_enabled
-    #     new_alert.save()
-
-    #     serializer = AlertSerializer(new_alert, context={'request': request})
-
-    #     return Response(serializer.data)
-
     def retrieve(self, request, pk=None):
         """Handle GET requests for single alert
 
@@ -79,11 +59,23 @@ class Alerts(ViewSet):
             Response -- JSON serialized list of alerts
         """
         try:
+            # alerts = Alert.objects.all()
             user = CustomUser.objects.get(user=request.auth.user)
             alerts_of_user = Alert.objects.filter(user=user)
+            alert_placement = self.request.query_params.get('alert_placement_id', None)
+
+            if alert_placement is not None:
+                alert = alerts_of_user.filter(alert_placement=alert_placement).get()
+                serializer = AlertSerializer(
+                alert, many=False, context={'request': request}
+                )
+            else:
+                serializer = AlertSerializer(
+                alerts_of_user, many=True, context={'request': request}
+                )
 
         except Alert.DoesNotExist as ex:
             return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
 
-        serializer = AlertSerializer(alerts_of_user, many=True, context={'request': request})
+        # serializer = AlertSerializer(alerts_of_user, many=True, context={'request': request})
         return Response(serializer.data)

@@ -19,7 +19,8 @@ class ContactSerializer(serializers.HyperlinkedModelSerializer):
             view_name='contact',
             lookup_field='id'
         )
-        fields = ('id', 'url', 'first_name', 'last_name', 'email', 'address', 'phone_number')
+        fields = ('id', 'url', 'first_name', 'last_name', 'email', 'address', 'phone_number', 'user')
+        depth = 2
 
 
 class Contacts(ViewSet):
@@ -109,3 +110,4 @@ class Contacts(ViewSet):
 
         serializer = ContactSerializer(contacts_of_user, many=True, context={'request': request})
         return Response(serializer.data)
+

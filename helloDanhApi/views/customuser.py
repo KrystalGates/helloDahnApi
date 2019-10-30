@@ -7,6 +7,7 @@ from rest_framework import serializers
 from rest_framework import status
 from django.contrib.auth.models import User
 from helloDanhApi.models import CustomUser
+from helloDanhApi.models import Contact
 
 
 class CustomUserSerializer(serializers.HyperlinkedModelSerializer):
@@ -21,25 +22,12 @@ class CustomUserSerializer(serializers.HyperlinkedModelSerializer):
             view_name='custom_user',
             lookup_field='id'
         )
-        fields = ('id', 'url', 'address', 'phone_number', 'user', 'user_id')
-        depth = 1
+        fields = ('id', 'url', 'address', 'phone_number', 'user', 'contacts')
+        depth = 2
 
 
 class CustomUsers(ViewSet):
     """Custom user for helloDanh"""
-
-    def retrieve(self, request, pk=None):
-        """Handle GET requests for a user
-
-        Returns:
-            Response -- JSON serialized user instance
-        """
-        try:
-            user = CustomUser.objects.get(pk=pk)
-            serializer = CustomUserSerializer(user, context={'request': request})
-            return Response(serializer.data)
-        except Exception as ex:
-            return HttpResponseServerError(ex)
 
     def update(self, request, pk=None):
         """Handle PUT requests for an user
@@ -62,24 +50,6 @@ class CustomUsers(ViewSet):
         custom_user.save()
 
         return Response({}, status=status.HTTP_204_NO_CONTENT)
-
-    # def destroy(self, request, pk=None):
-    #     """Handle DELETE requests for an user
-
-    #     Returns:
-    #         Response -- 200, 404, or 500 status code
-    #     """
-    #     try:
-    #         user = CustomUser.objects.get(pk=pk)
-    #         user.delete()
-
-    #         return Response({}, status=status.HTTP_204_NO_CONTENT)
-
-    #     except CustomUser.DoesNotExist as ex:
-    #         return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
-
-    #     except Exception as ex:
-    #         return Response({'message': ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     @action(methods=['get'], detail=False)
     def currentuser(self, request):
