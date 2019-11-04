@@ -13,6 +13,6 @@ class Alert(models.Model):
     '''
 
     alert = models.TextField(max_length=1200)
-    alert_enabled = models.BooleanField(default=True)
+    subject = models.CharField(max_length=40)
     alert_placement = models.ForeignKey(AlertPlacement, on_delete=models.DO_NOTHING)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)

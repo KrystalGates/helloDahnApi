@@ -19,7 +19,7 @@ class AlertSerializer(serializers.HyperlinkedModelSerializer):
             view_name='alert',
             lookup_field='id'
         )
-        fields = ('id', 'url', 'alert_enabled', 'alert', 'alert_placement_id')
+        fields = ('id', 'url', 'subject', 'alert', 'alert_placement_id')
         depth = 1
 
 
