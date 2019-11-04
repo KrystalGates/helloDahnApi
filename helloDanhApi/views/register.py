@@ -75,20 +75,20 @@ def register_user(request):
         alert='Hello red alert',
         alert_placement=AlertPlacement.objects.get(pk=1),
         user=custom_user,
-        alert_enabled=True
+        subject='Urgent Message: Code Red'
 
     )
     default_alert_yellow = Alert.objects.create(
         alert='Hello yellow alert',
         alert_placement=AlertPlacement.objects.get(pk=2),
         user=custom_user,
-        alert_enabled=True
+        subject='Code Yellow. Please read.'
     )
     default_alert_green = Alert.objects.create(
         alert='Hello green alert',
         alert_placement=AlertPlacement.objects.get(pk=3),
         user=custom_user,
-        alert_enabled=True
+        subject='Code Green. Please read.'
     )
 
     # Add default alerts
