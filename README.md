@@ -24,6 +24,6 @@ Activate the enviroment. Use the `source ./helloDanhEnv/bin/activate` command on
 
 `python manage.py runserver`
 
-You have the Hello DANH API up and running but WAIT you need to go to this [LINK](https://github.com/KrystalGates/helloDanhClient) follow the instructions!
+You have the Hello DANH API up and running but WAIT you need to go to [HelloDANHClient](https://github.com/KrystalGates/helloDanhClient) and follow the instructions if you haven't already!
 
 Created with [Django REST](https://www.django-rest-framework.org/)
