@@ -72,20 +72,20 @@ def register_user(request):
 
     # Create default alerts to user upon registration
     default_alert_red = Alert.objects.create(
-        alert='Hello red alert',
+        alert='Fill this alert with an urgent message to let your contacts know you need immediate help! Remember that the greetings are prewritten for you. You are just writing the body of the email!',
         alert_placement=AlertPlacement.objects.get(pk=1),
         user=custom_user,
         subject='Urgent Message: Code Red'
 
     )
     default_alert_yellow = Alert.objects.create(
-        alert='Hello yellow alert',
+        alert='Fill this alert with a cautious message to let your contacts know to keep an eye out for you! Remember that the greetings are prewritten for you. You are just writing the body of the email!',
         alert_placement=AlertPlacement.objects.get(pk=2),
         user=custom_user,
         subject='Code Yellow. Please read.'
     )
     default_alert_green = Alert.objects.create(
-        alert='Hello green alert',
+        alert='Fill this alert with a message to let your contacts know you are okay! Remember that the greetings are prewritten for you. You are just writing the body of the email!',
         alert_placement=AlertPlacement.objects.get(pk=3),
         user=custom_user,
         subject='Code Green. Please read.'
