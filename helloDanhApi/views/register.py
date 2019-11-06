@@ -1,6 +1,6 @@
 import json
 from django.http import HttpResponse
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 from django.views.decorators.csrf import csrf_exempt
@@ -16,9 +16,7 @@ def login_user(request):
 
     req_body = json.loads(request.body.decode())
 
-    # If the request is a HTTP POST, try to pull out the relevant information.
     if request.method == 'POST':
-
         # Use the built-in authenticate method to verify
         username = req_body['username']
         password = req_body['password']
@@ -57,6 +55,7 @@ def register_user(request):
         first_name=req_body['first_name'],
         last_name=req_body['last_name']
     )
+
 
     custom_user = CustomUser.objects.create(
         address=req_body['address'],

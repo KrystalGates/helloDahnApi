@@ -4,7 +4,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers
 from rest_framework import status
-from helloDanhApi.models import Alert, AlertPlacement, CustomUser
+from helloDanhApi.models import Alert, CustomUser
 
 
 class AlertSerializer(serializers.HyperlinkedModelSerializer):
@@ -59,7 +59,6 @@ class Alerts(ViewSet):
             Response -- JSON serialized list of alerts
         """
         try:
-            # alerts = Alert.objects.all()
             user = CustomUser.objects.get(user=request.auth.user)
             alerts_of_user = Alert.objects.filter(user=user)
             alert_placement = self.request.query_params.get('alert_placement_id', None)
@@ -77,5 +76,4 @@ class Alerts(ViewSet):
         except Alert.DoesNotExist as ex:
             return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
 
-        # serializer = AlertSerializer(alerts_of_user, many=True, context={'request': request})
         return Response(serializer.data)
