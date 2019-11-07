@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '2-=@930n)jnsp*ut2312r=lns)*8krxqb3_yiisuek42do5(fr'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -67,6 +67,8 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_WHITELIST = (
+    'http://hellodanh.com',
+    'http://www.hellodanh.com'
     'http://localhost:3000',
     'http://127.0.0.1:3000'
 )
